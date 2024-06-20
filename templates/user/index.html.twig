@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateurs!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Utilisateurs</h1>
+        <br>
+        {% include 'layouts/_flash_message.html.twig' %}
+        <br>
+        <table class="table">
+            <tr>
+                <th> Id </th>
+                <th> Email </th>
+                <th> Nom </th>
+                <th> Prénom </th>
+                <th> Role </th>
+                <th> Action </th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>
+                {% if 'ROLE_ADMIN' in user.roles %}
+                    Administrateur
+                {% elseif ('ROLE_EDITOR' in user.roles) %}
+                    Modérateur
+                {% else  %}
+                    Client
+                {% endif %}
+                {#
+                {% for role in user.roles %}
+                    {{ role }}
+                {% endfor %}
+                #}
+                </td>
+
+                <td>
+                    {% if ('ROLE_ADMIN' in user.roles) == false %} 
+
+                        {% if 'ROLE_EDITOR' in user.roles %}
+                        <a onclick="return confirm('Voulez-vous vraiment retire les droits à ce modérateur ?')" href="{{ path('app_user_remove_editor_role', {'id': user.id }) }}" class="btn btn-outline-danger"> Rétrograder </a>
+                        {% else %}
+                        <a onclick="return confirm('Voulez-vous vraiment promouvoir cet utilisateur ?')" href="{{ path('app_user_to_editor', {'id': user.id }) }}" class="btn btn-outline-primary"> Promouvoir modérateur </a>
+                        {% endif %}
+
+                        <a onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')" href=" {{path('app_user_remove', {'id': user.id}) }}" class="btn btn-danger "> Supprimer </a></td>
+
+                    {% endif  %} 
+
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
