@@ -1,0 +1,41 @@
+<br><br>
+
+{% if pageCount > 1 %}
+<nav style="display:flex align-items:center "aria-label="...">
+  <ul style="display: flex; align-items: center, margin: auto" class="pagination">
+
+    {% if previous is defined %}
+      <li class="page-item">
+      <a class="page-link" href="{{ path(route, query|merge({ (pageParameterName) :previous })  ) }}">Precedent</a>
+      </li>
+    {% endif %}
+
+{#
+    {% for page in pagesInRange %}
+
+      {% if page is not same as current %}
+        <li class="page-item active" aria-current="page" >
+        <a class="page-link" href="{{ path(route, query|merge({ (pageParameterName) :page })  ) }}"> {{ page }}</a>
+        </li>
+      
+      {% else %}
+        <li class="page-item" aria-current="page" >
+        <a class="page-link disabled" href="{{ path(route, query|merge({ (pageParameterName) :page })  ) }}"> {{ page }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+#}
+
+    {% if next is defined %}
+
+    <li class="page-item">
+      <a class="page-link" href="{{ path(route, query|merge({ (pageParameterName) :next })  ) }}">Suivant</a>
+    </li>
+
+    {% endif %}
+
+
+  </ul>
+</nav>
+{% endif %}

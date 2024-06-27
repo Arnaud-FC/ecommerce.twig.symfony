@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OrderController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h1>Commandes</h1>
+
+            {{ form_start(form) }}
+
+
+            {{ form_end(form) }}
+            <br>
+
+            <input type="submit" value="continuer" class="btn btn-outline-primary">
+        </div>
+
+        <div class="col-4" style="margin-top : 10%">
+        <h4>Montant a payer : {{ total }} EUR</h4>
+        <h4>Frais de livraison : {{ city.shipping_cost }} EUR</h4>
+        </div>
+
+    </div>
+    <br>
+    
+
+</div>
+{% endblock %}
