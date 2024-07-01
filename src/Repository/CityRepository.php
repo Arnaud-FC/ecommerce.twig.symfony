@@ -16,6 +16,17 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
+
+    // Ajoutez une méthode pour obtenir une ville spécifique
+    public function findOneByName(string $name): ?City
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return City[] Returns an array of City objects
     //     */

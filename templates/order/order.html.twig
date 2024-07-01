@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Commandes</h1>
+
+        {% for order in orders %}
+
+        <h2>Commande n: {{ order.id }} </h2>
+        Informations du client :
+        <table class="table table-bordered">
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+            </tr>
+            <tr>
+            <td>{{order.firstname}}</td>
+            <td>{{order.lastname}}</td>
+            <td>{{order.phone}}</td>
+            <td>{{order.adress}}</td>
+            <td>{{order.city.name}}</td>
+            </tr>
+        </table>
+        <h5> Corps de la commande </h5>
+        <table class="table table-bordered">
+            <tr>
+                <th>Image du produit</th>
+                <th>Nom du produit</th>
+                <th>Description</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Prix total</th>
+            </tr>
+            {% for product in order.orderProducts %}
+                <tr>
+                    <td> <img style="width: 60px; height: auto;" src="{{ asset('uploads/images/'~product.product.image)}}" class="card-img-top" alt="..."> </td>
+                    <td>{{ product.product.name }}</td>
+                    <td>{{ product.product.description|slice(0,120) }}</td>
+                    <td>{{ product.product.price }} EUR</td>
+                    <td>{{ product.qte }}</td>
+                    <td>{{ product.product.price * product.qte}} EUR</td>
+                </tr>
+            {% endfor %}
+            
+        </table>
+        <h5> Frais de livraison : {{ order.city.shippingCost }} EUR</h5>
+        <h5> Total a payer: {{ order.totalPrice }} EUR</h5>
+        <a href="" class="btn btn-outline-primary col-2 m-lg-1"> Marquer comme livrée</a>
+        <a href="" class="btn btn-outline-danger col-2 m-lg-1"> Supprimer la commade</a>
+
+        <br>
+        {% endfor %}
+
+    {{ knp_pagination_render(orders, 'layouts/pagination_template.html.twig')}}
+
+
+
+    </div>
+{% endblock %}
