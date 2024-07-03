@@ -42,7 +42,7 @@ class OrderController extends AbstractController
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
 
         if($order->isPayOndelivery()){
             if(!empty($data['total'])){
@@ -59,6 +59,7 @@ class OrderController extends AbstractController
                     $orderProduct->setOrder($order);
                     $orderProduct->setProduct($value['product']);
                     $orderProduct->setQte($value['quantity']);
+                    $order->addOrderProduct($orderProduct);
                     $em->persist($orderProduct);
 
                     
@@ -67,7 +68,7 @@ class OrderController extends AbstractController
                 }
             }
             
-            dd($order);
+
             
             $session->set('cart', []);
 
