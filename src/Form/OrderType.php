@@ -26,6 +26,12 @@ class OrderType extends AbstractType
                     'class' => 'form form-control'
                 ]
             ])
+            ->add('email', null, [
+                'label' => 'Email',
+                'attr' => [
+                    'class' => 'form form-control'
+                ]
+            ])
             ->add('phone', null, [
                 'label' => 'Téléphone',
                 'attr' => [
