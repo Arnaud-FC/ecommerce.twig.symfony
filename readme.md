@@ -5,6 +5,9 @@ Pour lancer le projet :
 Renommer le fichier .env.exemple a la racine du projet en .env
 ```composer install```
 ```php bin/console doctrine:migrations:migrate```
+```symfony serve```
+
+Si tout s'est bien passe le serveur est disponible sur l'adresse [https](https://localhost:8001/)
 
 Ensuite, se rendre sur l'onglet s'inscrire -> creer un utilisateur.
 Une fois fait, se rendre dans la base de donnée et ajouter ["ROLE_ADMIN"] à notre user.
