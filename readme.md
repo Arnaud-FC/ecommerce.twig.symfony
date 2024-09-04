@@ -1,6 +1,8 @@
 Pour lancer le projet : 
 
 docker compose up -d
+
+Renommer le fichier .env.exemple a la racine du projet en .env
 composer install
 php bin/console doctrine:migrations:migrate
 
