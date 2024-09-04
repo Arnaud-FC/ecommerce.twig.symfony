@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root # Change this to a secure password
+      MYSQL_DATABASE: ecommerce         # Optional: Create a database at startup
+      MYSQL_USER: user                    # Optional: Create a user with privileges
+      MYSQL_PASSWORD: user_password       # Optional: Password for the user
+    ports:
+      - "3307:3306"                        # Expose port 3306 for MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql          # Persist data in a Docker volume
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "8080:80"                          # Expose port 80 for phpMyAdmin
+    environment:
+      PMA_HOST: mysql                      # Host of the MySQL service
+      PMA_PORT: 3306                       # Port of the MySQL service
+    depends_on:
+      - mysql
+
+  ###> symfony/mailer ###
+  # mailer:
+  #   image: axllent/mailpit
+  #   ports:
+  #     - "1025"
+  #     - "8025"
+  #   environment:
+  #     MP_SMTP_AUTH_ACCEPT_ANY: 1
+  #     MP_SMTP_AUTH_ALLOW_INSECURE: 1
+  ###< symfony/mailer ###
+
+volumes:
+  mysql_data:
+
+# ###> doctrine/doctrine-bundle ###
+#   database:
+#     ports:
+#       - "5432"
+# ###< doctrine/doctrine-bundle ###
+
+# ###> symfony/mailer ###
+#   mailer:
+#     image: axllent/mailpit
+#     ports:
+#       - "1025"
+#       - "8025"
+#     environment:
+#       MP_SMTP_AUTH_ACCEPT_ANY: 1
+#       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+# ###< symfony/mailer ###
+

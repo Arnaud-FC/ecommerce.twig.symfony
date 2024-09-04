@@ -20,7 +20,7 @@ final class Version20240618133842 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP INDEX idx_user_email_password ON user');
+        // $this->addSql('DROP INDEX idx_user_email_password ON user');
         $this->addSql('ALTER TABLE user ADD first_name VARCHAR(255) NOT NULL, ADD last_name VARCHAR(255) NOT NULL');
     }
 
@@ -28,6 +28,6 @@ final class Version20240618133842 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE user DROP first_name, DROP last_name');
-        $this->addSql('CREATE INDEX idx_user_email_password ON user (email, password)');
+        // $this->addSql('CREATE INDEX idx_user_email_password ON user (email, password)');
     }
 }

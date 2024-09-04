@@ -11,7 +11,15 @@ class StripeController extends AbstractController
     #[Route('/pay/success', name: 'app_stripe_success')]
     public function success(): Response
     {
-        return $this->render('stripe/index.html.twig', [
+        return $this->render('stripe/success.html.twig', [
+            'controller_name' => 'StripeController',
+        ]);
+    }
+
+    #[Route('/pay/failure', name: 'app_stripe_failure')]
+    public function failure(): Response
+    {
+        return $this->render('stripe/failure.html.twig', [
             'controller_name' => 'StripeController',
         ]);
     }
@@ -19,7 +27,7 @@ class StripeController extends AbstractController
     #[Route('/pay/cancel', name: 'app_stripe_cancel')]
     public function cancel(): Response
     {
-        return $this->render('stripe/index.html.twig', [
+        return $this->render('stripe/failure.html.twig', [
             'controller_name' => 'StripeController',
         ]);
     }

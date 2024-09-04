@@ -34,7 +34,7 @@
         $(document).ready(function(){
             const citySelector = $('#order_city');
             const cityValue = citySelector.val();
-            const url = `https://127.0.0.1:8000/city/${cityValue}/shipping/cost`;
+            const url = `https://127.0.0.1:8001/city/${cityValue}/shipping/cost`;
             console.log(url)
 
             function ajaxRequest(url){
@@ -63,7 +63,7 @@
             ajaxRequest(url);
 
             citySelector.on('change', function () {
-                const urlUpdate = `https://127.0.0.1:8000/city/${$(this).val()}/shipping/cost`
+                const urlUpdate = `https://127.0.0.1:8001/city/${$(this).val()}/shipping/cost`
                 alert(urlUpdate)
             })
 

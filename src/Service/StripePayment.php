@@ -49,8 +49,8 @@ class StripePayment {
 
             ],
             'mode' => 'payment',
-            'success_url' => 'http://localhost:8000/pay/success',
-            'cancel_url' => 'http://localhost:8000/pay/cancel',
+            'success_url' => 'http://localhost:8001/pay/success',
+            'cancel_url' => 'http://localhost:8001/pay/cancel',
             'billing_address_collection' => 'required',
             // ship  
             'shipping_address_collection' => [
