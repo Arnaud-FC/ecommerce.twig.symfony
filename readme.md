@@ -1,10 +1,10 @@
 Pour lancer le projet : 
 
-docker compose up -d
+```docker compose up -d```
 
 Renommer le fichier .env.exemple a la racine du projet en .env
-composer install
-php bin/console doctrine:migrations:migrate
+```composer install```
+```php bin/console doctrine:migrations:migrate```
 
 Ensuite, se rendre sur l'onglet s'inscrire -> creer un utilisateur.
 Une fois fait, se rendre dans la base de donnée et ajouter ["ROLE_ADMIN"] à notre user.
