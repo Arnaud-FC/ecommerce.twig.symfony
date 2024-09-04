@@ -8,6 +8,7 @@ use App\Service\Cart;
 use DateTimeImmutable;
 use App\Form\OrderType;
 use App\Entity\OrderProducts;
+use App\Service\StripePayment;
 use Symfony\Component\Mime\Email;
 use App\Repository\CityRepository;
 use App\Repository\OrderRepository;
@@ -89,6 +90,18 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('order_ok_message');
             
         }
+
+        $payment = new StripePayment();
+
+        $shippingCost = $order->getCity()->getShippingCost();
+
+        $payment->startPayment($data, $shippingCost);
+        // Stripe 
+        $stripeRedirectUrl = $payment->getStripeRedirectUrl();
+
+
+
+        return $this->redirect($stripeRedirectUrl);
             
         }
 
